@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html ng-app= "formulario">
-<title>Formulario Estudiantes</title>
+<title>TuggerTracker Data</title>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 <body>
 
-  <span class="md-display-1" layout-align = "center center">Ficha de Alumno</span>
+  <span class="md-display-1" layout-align = "center center">Tiempos Tugger</span>
   <md-card ng-controller = "formController" ng-cloak>
     <md-tabs md-dynamic-height md-border-bottom ng-cloak md-selected = "tabIndex">
-      <md-tab label="Datos Generales">
+      <md-tab label="Tiempos Promedio">
 
         <md-card-title>
 
           <md-card-title-text>
-            <span class="md-headline">Datos Generales</span>
+            <span class="md-headline">Tiempos Promedio</span>
          </md-card-title-text>
 
         </md-card-title>
@@ -25,24 +26,25 @@
 <!-- *** NOMBRE Y APELLIDOS ************************************************************************************************** -->
 <!-- ************************************************************************************************************************* -->
 
-          <div layout ="row"><span class = "md-subhead">Nombre y Apellidos: </span></div>
+          <div layout ="row"><span class = "md-subhead">Tiempos Promedio por ruta: </span></div>
           <div layout = "row" layout-margin>
-            <md-input-container>
             
-              <label>Apellido Paterno</label>
-              <input type="text" name="apellidoPaterno" required ng-model = "nuevoRegistro.apellidoPaterno">
-            </md-input-container>
+            <canvas id="bar" class="chart chart-bar"
+              chart-data="data" chart-labels="labels" chart-series="series">
+            </canvas>
+          </div>
 
-            <md-input-container>
-              <label>Apellido Materno</label>
-              <input type="text" name="apellidoMaterno" required ng-model = "nuevoRegistro.apellidoMaterno">
-           </md-input-container>
-        
+          <div layout = "row" layout-margin>
+            <canvas id="line" class="chart chart-line" chart-data="data"
+            chart-labels="labels" chart-series="series" chart-options="options"
+            chart-dataset-override="datasetOverride" chart-click="onClick">
+            </canvas>
+          </div>
 
-          <md-input-container>
-              <label>Nombre(s)</label>
-             <input type="text" name="Nombres" required ng-model="nuevoRegistro.nombres">
-            </md-input-container>
+          <div layout = "row" layout-margin>
+            <canvas id="doughnut" class="chart chart-doughnut"
+              chart-data="data" chart-labels="labels">
+            </canvas> 
           </div>
 
 
@@ -383,12 +385,15 @@
       </md-tabs>
   </md-card>
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.6.10/angular-messages.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.8/angular-material.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular-aria.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular-animate.js"></script>
     <script type="text/javascript" src="curp.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script type="text/javascript" src="angular-chart.js"></script>
 
     <script type="text/javascript" src="app.js"></script>
 </body>

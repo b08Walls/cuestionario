@@ -1,10 +1,19 @@
 // MODULE
-var formulario = angular.module('formulario',['ngAria','ngMaterial', 'ngMessages' ]);
+var formulario = angular.module('formulario',['ngAria','ngMaterial', 'ngMessages' ,'chart.js']);
 
-formulario.controller('formController', function ($scope, $window, $mdDialog) {
+formulario.controller('formController', function ($scope, $window, $mdDialog,$timeout) {
 
 	this.myDate = new Date;
 	this.isOpen = false;
+
+	$scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+	$scope.series = ['Series A', 'Series B'];
+
+	$scope.data = [
+	[65, 59, 80, 81, 56, 55, 40],
+	[45, 39, 60, 51, 26, 65, 44],
+	[28, 48, 40, 19, 86, 27, 90]
+	];
 
 	$scope.xmlHttp = new XMLHttpRequest();
 
@@ -17,6 +26,52 @@ formulario.controller('formController', function ($scope, $window, $mdDialog) {
 		$window.scrollTo(0, 0);
 		$scope.tabIndex = $scope.tabIndex +1;
 	}
+
+
+	$scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+  $scope.series = ['Series A', 'Series B'];
+  // $scope.data = [
+  //   [65, 59, 80, 81, 56, 55, 40],
+  //   [28, 48, 40, 19, 86, 27, 90]
+  // ];
+
+  $timeout(function(){
+  	console.log($scope.data);
+
+  	for(var i = 0;i<$scope.data.length;i++){
+  		for(var j = 0;j<$scope.data[i].length;j++){
+  			$scope.data[i][j] = $scope.data[i][j] + (10*j);
+
+  			console.log($scope.data[i][j])
+  		}
+  	}
+
+  	console.log($scope.data);
+
+  },5000);
+
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
+  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+  $scope.options = {
+    scales: {
+      yAxes: [
+        {
+          id: 'y-axis-1',
+          type: 'linear',
+          display: true,
+          position: 'left'
+        },
+        {
+          id: 'y-axis-2',
+          type: 'linear',
+          display: true,
+          position: 'right'
+        }
+      ]
+    }
+  };
 
 	$scope.estadosNombres = ["Aguascalientas", "Baja California", "Baja California Sur", "Campeche", "Chipas", "Chihuahua", "Coahuila", "Colima", "Cd. de México", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Edo. de México", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"];
 
